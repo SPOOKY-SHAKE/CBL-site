@@ -34,7 +34,7 @@ export const servicesData = [
 export const testimonialsData = [
 {
   id: 1,
-  name: "John Smith",
+  name: "John doe",
   company: "Testimonial Author Company",
   rating: 5,
   text: "The Center for Business Law has been instrumental in helping us navigate complex legal landscapes, offering sound advice and invaluable resources that have strengthened our business.",
