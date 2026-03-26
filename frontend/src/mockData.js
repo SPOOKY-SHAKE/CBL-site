@@ -7,7 +7,7 @@ export const servicesData = [
 },
 {
   id: 2,
-  title: "Tailored Solutions",
+  title: "Tailored Updates",
   description: "Customized services designed to fit your business needs.",
   image: "https://images.pexels.com/photos/7841431/pexels-photo-7841431.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 },
