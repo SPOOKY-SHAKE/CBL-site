@@ -20,7 +20,7 @@ export const servicesData = [
 {
   id: 4,
   title: "Industry Report",
-  description: "Thorough compliance audits to ensure your business adheres to all regulatory requirements and standards.",
+  description: "Thorough audits and reports for ensuring your business adheres to all regulatory requirements and standards prevailing in the market trend.",
   image: "https://images.pexels.com/photos/7841462/pexels-photo-7841462.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 },
 {
