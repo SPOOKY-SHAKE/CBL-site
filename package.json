@@ -1,1 +1,1 @@
-{\n  "name": "cbl-site",\n  "version": "1.0.0",\n  "scripts": {\n    "build": "your-build-command",\n    "start": "your-start-command"\n  },\n  "dependencies": {\n    "your-dependency": "^x.x.x"\n  }\n}
+{"name": "CBL-site","version": "1.0.0","description": "A project that references the frontend build process.","main": "index.js","scripts": {"build": "webpack --mode production","start": "webpack serve --mode development"},"repository": {"type": "git","url": "git+https://github.com/SPOOKY-SHAKE/CBL-site.git"},"author": "SPOOKY-SHAKE","license": "MIT"}
