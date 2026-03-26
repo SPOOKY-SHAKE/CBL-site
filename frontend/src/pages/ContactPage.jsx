@@ -66,7 +66,7 @@ LOCATED AT : Nagri, PO: Bukru, PS: Kanke-Pithoria Road, Kanke, Ranchi (Jharkhand
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Phone Number</h3>
-                    <p className="!font-['Georgia'] !text-xl !text-center text-gray-600">FACULTY CONVENOR   : 00000 00000 STUDENT CONVENER: 88006 23704</p>
+                    <p className="!font-['Georgia'] !text-2xl !text-center text-gray-600">FACULTY CONVENOR   : 00000 00000 STUDENT CONVENER: 88006 23704</p>
                   </div>
                 </div>
                 
@@ -96,9 +96,9 @@ LOCATED AT : Nagri, PO: Bukru, PS: Kanke-Pithoria Road, Kanke, Ranchi (Jharkhand
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <input type="text" name="name" value={formData.name} onChange={handleChange}
-                    placeholder="Your Name"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E31E24]" />
+                  placeholder="Your Name"
+                  required
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E31E24]" />
 
                 </div>
                 
