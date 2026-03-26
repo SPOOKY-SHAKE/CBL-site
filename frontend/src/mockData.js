@@ -13,7 +13,7 @@ export const servicesData = [
 },
 {
   id: 3,
-  title: "Trust and Integrity",
+  title: "Professional Consulting",
   description: "Foundation on reliability and ethical practices on professional services in business law, regulatory audit and taxation.",
   image: "https://images.pexels.com/photos/7841466/pexels-photo-7841466.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
 },
