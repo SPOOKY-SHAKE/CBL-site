@@ -56,7 +56,7 @@ export const statsData = [
   value: "500+"
 },
 {
-  label: "SATISFIED CUSTOMERS",
+  label: "",
   value: "98%"
 },
 {
