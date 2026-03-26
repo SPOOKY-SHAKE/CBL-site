@@ -1,0 +1,1 @@
+{\n  "name": "cbl-site",\n  "version": "1.0.0",\n  "scripts": {\n    "build": "your-build-command",\n    "start": "your-start-command"\n  },\n  "dependencies": {\n    "your-dependency": "^x.x.x"\n  }\n}
