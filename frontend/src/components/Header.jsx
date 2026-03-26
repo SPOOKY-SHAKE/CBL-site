@@ -14,7 +14,7 @@ const Header = () => {
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3">
           <img
-            src="https://customer-assets.emergentagent.com/job_wp-staging-build/artifacts/5kxb23qm_Screenshot%202026-03-18%20141638.png"
+            src="https://customer-assets.emergentagent.com/job_wp-staging-build/artifacts/w8z0cn39_Screenshot%202026-03-05%20102536.png"
             alt="Center for Business Laws Logo"
             className="h-16 w-auto" />
         </Link>

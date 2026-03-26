@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 import { Button } from '../components/ui/button';
 import { CheckCircle } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const GetStartedPage = () => {
   const { toast } = useToast();
   const [email, setEmail] = useState('');
+  const [isSubscribing, setIsSubscribing] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -15,23 +20,63 @@ const GetStartedPage = () => {
     service: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleNewsletterSubmit = (e) => {
+  const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
-    toast({
-      title: "Subscribed!",
-      description: "You've successfully subscribed to our newsletter.",
-    });
-    setEmail('');
+    setIsSubscribing(true);
+    
+    try {
+      await axios.post(`${API}/newsletter/subscribe`, { email });
+      
+      toast({
+        title: "Subscribed Successfully!",
+        description: "Welcome! Check your email for a confirmation message from cbl@nusrlranchi.ac.in",
+      });
+      
+      setEmail('');
+    } catch (error) {
+      const message = error.response?.data?.detail || "Failed to subscribe. Please try again.";
+      toast({
+        title: "Subscription Error",
+        description: message,
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubscribing(false);
+    }
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    toast({
-      title: "Request Submitted!",
-      description: "Thank you for your interest. Our team will contact you shortly.",
-    });
-    setFormData({ firstName: '', lastName: '', email: '', company: '', phone: '', service: '', message: '' });
+    setIsSubmitting(true);
+    
+    try {
+      const consultationData = {
+        name: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        phone: formData.phone,
+        subject: `Consultation Request - ${formData.service}`,
+        message: `Company: ${formData.company}\nService Interest: ${formData.service}\n\nMessage:\n${formData.message}`
+      };
+      
+      await axios.post(`${API}/contact`, consultationData);
+      
+      toast({
+        title: "Request Submitted Successfully!",
+        description: "Thank you! Our team will contact you at " + formData.email + " shortly.",
+      });
+      
+      setFormData({ firstName: '', lastName: '', email: '', company: '', phone: '', service: '', message: '' });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to submit request. Please try again or email us at cbl@nusrlranchi.ac.in",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -86,9 +131,10 @@ const GetStartedPage = () => {
                   />
                   <button 
                     type="submit"
-                    className="bg-[#E31E24] hover:bg-[#B81820] text-white px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl whitespace-nowrap"
+                    disabled={isSubscribing}
+                    className="bg-[#E31E24] hover:bg-[#B81820] text-white px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Subscribe
+                    {isSubscribing ? 'Subscribing...' : 'Subscribe'}
                   </button>
                 </form>
               </div>
@@ -173,9 +219,10 @@ const GetStartedPage = () => {
                 
                 <Button 
                   type="submit"
-                  className="w-full bg-[#E31E24] hover:bg-[#B81820] text-white rounded-full px-8 py-6 text-base transition-all duration-300 shadow-lg hover:shadow-xl"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#E31E24] hover:bg-[#B81820] text-white rounded-full px-8 py-6 text-base transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  REQUEST CONSULTATION
+                  {isSubmitting ? 'SUBMITTING...' : 'REQUEST CONSULTATION'}
                 </Button>
               </form>
             </div>

@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Button } from '../components/ui/button';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const ContactPage = () => {
   const { toast } = useToast();
@@ -12,14 +16,30 @@ const ContactPage = () => {
     subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you soon."
-    });
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    setIsSubmitting(true);
+    
+    try {
+      await axios.post(`${API}/contact`, formData);
+      
+      toast({
+        title: "Message Sent Successfully!",
+        description: "Thank you for contacting us. We'll get back to you soon.",
+      });
+      
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again or email us directly at cbl@nusrlranchi.ac.in",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -151,9 +171,10 @@ LOCATED AT : Nagri, PO: Bukru, PS: Kanke-Pithoria Road, Kanke, Ranchi (Jharkhand
                 
                 <Button
                   type="submit"
-                  className="w-full bg-[#E31E24] hover:bg-[#B81820] text-white rounded-full px-8 py-6 text-base transition-all duration-300 shadow-lg hover:shadow-xl">
+                  disabled={isSubmitting}
+                  className="w-full bg-[#E31E24] hover:bg-[#B81820] text-white rounded-full px-8 py-6 text-base transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed">
 
-                  SEND MESSAGE
+                  {isSubmitting ? 'SENDING...' : 'SEND MESSAGE'}
                 </Button>
               </form>
             </div>

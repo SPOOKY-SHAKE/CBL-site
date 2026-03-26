@@ -1,9 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { blogData } from '../mockData';
 import { Calendar, User } from 'lucide-react';
+import { useToast } from '../hooks/use-toast';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const BlogPage = () => {
+  const { toast } = useToast();
+  const [email, setEmail] = useState('');
+  const [isSubscribing, setIsSubscribing] = useState(false);
+
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubscribing(true);
+    
+    try {
+      await axios.post(`${API}/newsletter/subscribe`, { email });
+      
+      toast({
+        title: "Subscribed Successfully!",
+        description: "Welcome! Check your email for a confirmation from cbl@nusrlranchi.ac.in",
+      });
+      
+      setEmail('');
+    } catch (error) {
+      const message = error.response?.data?.detail || "Failed to subscribe.";
+      toast({
+        title: "Subscription Error",
+        description: message,
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubscribing(false);
+    }
+  };
   return (
     <div className="pt-24">
       <section className="py-20 px-6 bg-[#FDF5F0]">
@@ -66,16 +99,22 @@ const BlogPage = () => {
           <p className="text-gray-700 mb-8">
             Get the latest legal insights, regulatory updates, and business law news delivered to your inbox.
           </p>
-          <div className="flex gap-4 max-w-md mx-auto">
+          <form onSubmit={handleNewsletterSubmit} className="flex gap-4 max-w-md mx-auto">
             <input 
-              type="email" 
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
+              required
               className="flex-1 px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#E31E24]"
             />
-            <button className="bg-[#E31E24] hover:bg-[#B81820] text-white px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
-              Subscribe
+            <button 
+              type="submit"
+              disabled={isSubscribing}
+              className="bg-[#E31E24] hover:bg-[#B81820] text-white px-8 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed">
+              {isSubscribing ? 'Subscribing...' : 'Subscribe'}
             </button>
-          </div>
+          </form>
         </div>
       </section>
     </div>
