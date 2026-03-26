@@ -64,7 +64,7 @@ export const statsData = [
   value: ""
 },
 {
-  label: "NUMBER OF STAFF",
+  label: "OUR TEAM",
   value: "45+"
 }];
 
