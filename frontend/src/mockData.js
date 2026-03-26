@@ -61,7 +61,7 @@ export const statsData = [
 },
 {
   label: "",
-  value: "250+"
+  value: ""
 },
 {
   label: "NUMBER OF STAFF",
