@@ -48,10 +48,10 @@ const ServicesDetailPage = () => {
           <div className="space-y-6">
             {["Industry linked legal expertise",
 
-            "Proven track record with 1,000+ satisfied business clients", "Proactive seminars and frequent competitions for engagement", "Practical and professional tailored advices on current updates in market",
+            "Proven track record with 1,000+ satisfied business clients", "Proactive seminars and frequent competitions for engagement", "Practical and professional tailored advices on current updates in market", "Comprehensive support from Incorporation to Insolvency ",
 
 
-            "Comprehensive support from formation to exit planning",
+
             "Expert guidance in complex regulatory environments"].
             map((benefit, index) =>
             <div key={index} className="flex items-start gap-4">
