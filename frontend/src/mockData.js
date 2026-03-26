@@ -60,7 +60,7 @@ export const statsData = [
   value: "98%"
 },
 {
-  label: "ACHIEVED GOALS",
+  label: "",
   value: "250+"
 },
 {
