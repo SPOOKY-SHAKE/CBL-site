@@ -1,0 +1,11 @@
+# wrangler.toml
+name = "your_project_name"
+type = "javascript"
+
+[build]
+command = "npm install && npm run build"
+directory = "dist"
+
+[env.production]
+route = "your-site.example.com/*"
+zone_id = "your_zone_id"
